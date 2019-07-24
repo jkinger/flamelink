@@ -1220,7 +1220,7 @@ function flamelink(conf = {}) {
       };
 
       // If mediaType === 'images', file is resizeable and sizes/widths are set, resize images here
-      if (mediaType === 'images' && updateMethod === 'put' && Array.isArray(options.sizes)) {
+      if (mediaType === 'images' && updateMethod === 'put' && Array.isArray(options.sizes) && options.resizeImages) {
         filePayload.sizes = options.sizes.map(size => {
           const { width, height, quality } = size;
           if (

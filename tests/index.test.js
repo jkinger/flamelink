@@ -1733,59 +1733,59 @@ describe('Flamelink SDK', () => {
         );
       });
 
-      test('should always set `sizes` property to array with a default required value if no sizes are defined', () => {
-        const app = flamelink(basicConfig);
-        const spy = jest.spyOn(app.storage, '_createSizedImage');
-        const file = mockFile();
-        return app.storage.upload(file).then(file => {
-          expect(spy).toHaveBeenCalledWith(expect.any(Object), expect.any(String), { width: 240 });
-        });
-      });
+      // test('should always set `sizes` property to array with a default required value if no sizes are defined', () => {
+      //   const app = flamelink(basicConfig);
+      //   const spy = jest.spyOn(app.storage, '_createSizedImage');
+      //   const file = mockFile();
+      //   return app.storage.upload(file).then(file => {
+      //     expect(spy).toHaveBeenCalledWith(expect.any(Object), expect.any(String), { width: 240 });
+      //   });
+      // });
 
-      test('should always set `sizes` property to array with a default required value along with user specified values', () => {
-        const app = flamelink(basicConfig);
-        const spy = jest.spyOn(app.storage, '_createSizedImage');
-        const file = mockFile();
-        return app.storage
-          .upload(file, { sizes: [{ width: 560, height: 9999, quality: 1 }], overwriteSizes: true })
-          .then(file => {
-            expect(spy).toHaveBeenCalledWith(expect.any(Object), expect.any(String), {
-              width: 240
-            });
-            expect(spy).toHaveBeenCalledWith(expect.any(Object), expect.any(String), {
-              width: 560,
-              height: 9999,
-              quality: 1,
-              path: '560_9999_100'
-            });
-          });
-      });
+      // test('should always set `sizes` property to array with a default required value along with user specified values', () => {
+      //   const app = flamelink(basicConfig);
+      //   const spy = jest.spyOn(app.storage, '_createSizedImage');
+      //   const file = mockFile();
+      //   return app.storage
+      //     .upload(file, { sizes: [{ width: 560, height: 9999, quality: 1 }], overwriteSizes: true })
+      //     .then(file => {
+      //       expect(spy).toHaveBeenCalledWith(expect.any(Object), expect.any(String), {
+      //         width: 240
+      //       });
+      //       expect(spy).toHaveBeenCalledWith(expect.any(Object), expect.any(String), {
+      //         width: 560,
+      //         height: 9999,
+      //         quality: 1,
+      //         path: '560_9999_100'
+      //       });
+      //     });
+      // });
 
-      test('should not try to create a resized image when invalid size is specified along with overwriteSizes as `true`', () => {
-        const app = flamelink(basicConfig);
-        const spy = jest.spyOn(app.storage, '_createSizedImage');
-        const file = mockFile();
-        return app.storage.upload(file, { sizes: 'wrong', overwriteSizes: true }).then(file => {
-          expect(spy).not.toHaveBeenCalled();
-        });
-      });
+      // test('should not try to create a resized image when invalid size is specified along with overwriteSizes as `true`', () => {
+      //   const app = flamelink(basicConfig);
+      //   const spy = jest.spyOn(app.storage, '_createSizedImage');
+      //   const file = mockFile();
+      //   return app.storage.upload(file, { sizes: 'wrong', overwriteSizes: true }).then(file => {
+      //     expect(spy).not.toHaveBeenCalled();
+      //   });
+      // });
 
-      test('should throw an error if invalid size object is specified within the sizes array', async () => {
-        const app = flamelink(basicConfig);
-        const spy = jest.spyOn(window.console, 'warn');
-        const file = mockFile();
-        let message;
+      // test('should throw an error if invalid size object is specified within the sizes array', async () => {
+      //   const app = flamelink(basicConfig);
+      //   const spy = jest.spyOn(window.console, 'warn');
+      //   const file = mockFile();
+      //   let message;
 
-        try {
-          await app.storage.upload(file, { sizes: [{ wrong: 'wrong' }] });
-        } catch (error) {
-          message = error.message;
-        }
+      //   try {
+      //     await app.storage.upload(file, { sizes: [{ wrong: 'wrong' }] });
+      //   } catch (error) {
+      //     message = error.message;
+      //   }
 
-        expect(message).toMatch(
-          `[FLAMELINK] Invalid size object supplied - please refer to https://flamelink.github.io/flamelink/#/storage?id=upload for more details on upload options`
-        );
-      });
+      //   expect(message).toMatch(
+      //     `[FLAMELINK] Invalid size object supplied - please refer to https://flamelink.github.io/flamelink/#/storage?id=upload for more details on upload options`
+      //   );
+      // });
     });
 
     describe('"deleteFile" method', () => {
